@@ -36,7 +36,7 @@ int main()
         scanf("%d", &ch);
         if (ch == 1)
         {
-            printf("\nSelect the type of sort :\n1.Ascending Order\n2.Descending Order\n3.Exit\n");
+            printf("Select the type of sort :\n1.Ascending Order\n2.Descending Order\n");
             scanf("%d", &type);
             sort(arr, n, type);
             printf("Sorted Array : ");
