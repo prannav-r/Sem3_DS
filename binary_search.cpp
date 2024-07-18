@@ -51,7 +51,7 @@ int main()
             printf("Enter the element to search for :\n");
             scanf("%d",&req);
             int res=binarySearch(arr,0,n-1,req);
-            (res==-1)?printf("Element not found in the list.\n"):printf("Element found at index %d\n",res);
+            (res==-1)?printf("Element not found in the array.\n"):printf("Element found at index %d.\n",res);
         }
         else
            break;
