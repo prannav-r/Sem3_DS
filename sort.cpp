@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 int i,n;
-void ascsort(int arr[],int n){
+void sort(int arr[],int n){
     int j,k,r;
     for (j=0;j<n;j++){
         for(k=j+1;k<n;k++){
