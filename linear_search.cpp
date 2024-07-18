@@ -23,10 +23,9 @@ for(i=0;i<n;i++){
 printf("Enter the element to search:");
 scanf("%d",&x);
 int res=ls(arr,n,x);
-if (res == 1){
+if (res == 1)
     printf("Element found in the array.\n");
- }
-else{
+
+else
     printf("Element not found in the array.\n");
- }
 }

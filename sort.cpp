@@ -2,18 +2,19 @@
 
 #include <stdio.h>
 
-int i,n;
-void sort(int arr[],int n){
+int i,n,type;
+
+void sort(int arr[],int n,int type){
     int j,k,r;
-    for (j=0;j<n;j++){
+    for (j=0;j<n-1;j++){
         for(k=j+1;k<n;k++){
-            if (arr[j]>arr[k]){
-                r=arr[j];
-                arr[j]=arr[k];
-                arr[k]=r;
-            }
+           if (type==1?arr[j]>arr[k]:arr[j]<arr[k]){
+            r=arr[j];
+            arr[j]=arr[k];
+            arr[k]=r;
         }
     }
+  }
 }
 
 int main(){
@@ -24,10 +25,27 @@ int main(){
         printf("Enter element %d : ",i+1);
         scanf("%d",&arr[i]);
     }
-    sort(arr,n);
-    printf("Sorted Array : ");
-    for (i=0;i<n-1;i++){
-        printf("%d,",arr[i]);
+    while (true)
+    {
+       printf("\nSelect the type of sort :\n1.Ascending Order\n2.Descending Order\n3.Exit\n");
+       scanf("%d",&type);
+       if (type==1){
+        sort(arr,n,type);
+        printf("Sorted Array : ");
+        for (i=0;i<n-1;i++){
+           printf("%d,",arr[i]);
+           }
+            printf("%d",arr[n-1]);
+       }
+       else if(type==2){
+        sort(arr,n,type);
+        printf("Sorted Array : ");
+        for (i=0;i<n-1;i++){
+            printf("%d,",arr[i]);
+           }
+        printf("%d",arr[n-1]);
+       }
+       else
+        break;
     }
-    printf("%d",arr[n-1]);
 }
