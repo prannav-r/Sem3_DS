@@ -69,7 +69,7 @@ bool List ::ins_end(int num){
 
 //List Method to Insert an Element at the position specified in the List.
 bool List ::ins_pos(int num,int pos){
-    if (cur==size-1)
+    if (cur==size-1||pos>cur||pos<0)
         return 0;
     
     else{
