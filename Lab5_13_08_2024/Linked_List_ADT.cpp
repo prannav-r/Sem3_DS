@@ -1,7 +1,35 @@
 //
 
+#include <stdio.h>
+#include <stdlib.h>
+#define size 10   //defining a static size
+#define np 0      //defining a default error code value
 
+class List
+{
+    struct node
+    {
+        int data;
+        struct node *next;
+    }*head;
+    public:
+        List()
+        {
+            head=NULL;
+        }
+        void display();
+        bool ins_beg(int);
+        bool ins_end(int);
+        bool ins_pos(int,int);
+        int del_beg();
+        int del_end();
+        int del_pos(int);
+};
 
+void List ::display()
+{
+    
+}
 
 
 
