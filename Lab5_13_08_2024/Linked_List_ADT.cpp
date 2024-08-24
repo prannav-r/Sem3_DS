@@ -2,7 +2,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define size 10   //defining a static size
 #define np 0      //defining a default error code value
 
 class List
@@ -21,49 +20,61 @@ class List
         bool ins_beg(int);
         bool ins_end(int);
         bool ins_pos(int,int);
-        int del_beg();
-        int del_end();
-        int del_pos(int);
 };
 
-void List ::display()
+void List :: display()
 {
-    
+    struct node *temp = head;  
+      
+    if(head == NULL) {  
+        printf("List is empty");  
+        return;
+    }  
+    printf("Linked list: [");  
+    while(temp != NULL)
+    {
+        printf("%d, ", temp->data);  
+        temp = temp->next;  
+    }
+    printf("]");
 }
 
 
+bool List :: ins_beg(int num)
+{
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data=num;
+    newnode->next=head;
+    head=newnode;
+    return 1;
+}
 
+bool List :: ins_end(int num)
+{
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    newnode -> data = num;
+    newnode -> next = NULL;
+    if(head == NULL)
+        head = newnode;
+    else
+    {
+    struct node* temp = head;
+    while(temp -> next != NULL)
+    {
+        temp = temp -> next;
+    }
+    temp -> next = newnode;
+    return 1;
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+bool List :: ins_pos(int num,int pos)
+{
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    newnode -> data = num;
+    newnode -> next = NULL;
+    
+}
 
 int main(){
     int ch,num,pos,dn;
@@ -82,18 +93,14 @@ int main(){
         case 2:
             printf("Enter the number to insert: ");
             scanf("%d",&num);
-            if(!(l1.ins_beg(num)))
-                printf("Can't insert %d. The list is full.",num);
-            else
+            if (l1.ins_beg(num))
                 printf("Succesfully inserted %d",num);
             break;
 
         case 3:
             printf("Enter the number to insert: ");
             scanf("%d",&num);
-            if(!(l1.ins_end(num)))
-                printf("Can't insert %d. The list is full.",num);
-            else
+            if (l1.ins_end(num))
                 printf("Succesfully inserted %d",num);
             break;
         
@@ -102,40 +109,8 @@ int main(){
             scanf("%d",&num);
             printf("Enter the position(index) to insert: ");
             scanf("%d",&pos);
-            if(!(l1.ins_pos(num,pos)))
-                printf("Can't insert %d. The list is full.",num);
-            else
+            if((l1.ins_pos(num,pos)))
                 printf("Succesfully inserted %d",num);
-            break;
-
-        case 5:
-            dn=l1.del_beg();
-            if(dn==np)
-                printf("Can't delete. The list is empty.");
-            else
-                printf("Succesfully deleted %d",dn);
-            break;
-
-        case 6:
-            dn=l1.del_end();
-            if(dn==np)
-                printf("Can't delete. The list is empty.");
-            else
-                printf("Succesfully deleted %d",dn);
-            break;
-
-        case 7:
-            printf("Enter the position to delete: ");
-            scanf("%d",&pos);
-            dn=l1.del_pos(pos);
-            if(dn==np)
-                printf("Can't delete. The list is empty.");
-            else
-                printf("Succesfully inserted %d",dn);
-            break;
-
-        case 8:
-            exit(0);
             break;
 
         default:
