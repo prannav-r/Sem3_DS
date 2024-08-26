@@ -1,8 +1,9 @@
-//change
+//C++ menu-driven program to implement List ADT using a singly linked list.
 
 #include <stdio.h>
 #include <stdlib.h>
 #define np 0 // defining a default error code value
+#define np1 1
 
 class List
 {
@@ -24,6 +25,9 @@ public:
     int del_beg();
     int del_end();
     int del_pos(int);
+    int search(int);
+    void rev();
+    void rev_dis();
 };
 
 void List ::display()
@@ -139,21 +143,81 @@ int List::del_end()
 }
 
 int List::del_pos(int pos)
+{   
+    if (pos==0)
+        del_beg();
+
+    else if (head == NULL)
+        return np;
+
+    else{
+        struct node* temp=head;
+        int i;
+        for(i=0;i<pos-1;i++){
+            temp=temp->next;
+        }
+        temp->next=temp->next->next;
+        return 1;
+
+    }
+}
+
+int List::search(int num)
 {
-    printf("working");
+    if(head==NULL){
+        return np;
+    }
+    else{
+        struct node* temp=head;
+        int i=0;
+        while(temp!=NULL){
+            if(temp->data==num){
+                return i;
+                break;}
+            i++;
+            temp=temp->next;
+        }
+        return np1;
+    }
+}
+
+void List::rev()
+{
+    struct node* prev=NULL;
+	struct node* current=head;
+	struct node* next=NULL;
+	while(current!=NULL){
+		next=current->next;
+		current->next=prev;
+		prev=current;
+		current=next;
+		}
+	head=prev;
+}
+
+void List::rev_dis()
+{
+    rev();
+	display();
+	rev();
 }
 
 int main()
 {
     int ch, num, pos, dn;
+
     List l1; // Creating a List Object l1.
+
     while (true)
     {
         printf("\n\n1.Insert at Beginning\n2.Insert at End\n");
         printf("3.Insert at Position\n4.Delete at Beginning\n5.Pop Element\n");
         printf("6.Delete at Position\n7.Search Element\n8.Display the List\n");
+        printf("9.Display Reverse without changing the structure of the list\n");
+        printf("10.Reverse link of the linked list\n11.Exit\n");
         printf("Enter your choice :\n");
         scanf("%d", &ch);
+
         switch (ch)
         {
 
@@ -215,17 +279,34 @@ int main()
         case 7:
             printf("Enter the number to search: ");
             scanf("%d", &num);
-            dn = l1.del_pos(pos);
+            dn = l1.search(num);
             if (dn == np)
-                printf("Element not found ");
+                printf("List is Empty!");
+
+            else if (dn == np1)
+                printf("Element not found in the List!");
+            
             else
-                printf("Element found at position");
-            break;
+                printf("Element found at position ",dn);
+                break;
 
         case 8:
             l1.display();
             break;
 
+        case 9:
+            l1.rev_dis();
+            break;
+
+        case 10:
+            l1.rev();
+            l1.display();
+            break;
+
+        case 11:
+            exit(0);
+            break;
+        
         default:
             printf("Please Enter a Valid Choice!");
             break;
