@@ -13,8 +13,6 @@ class Dlist
         struct node *prev;
     } *head, *tail;
 
-    struct node *newnode = (struct node *)malloc(sizeof(struct node));
-
 public:
     Dlist()
     {
@@ -61,7 +59,7 @@ void Dlist ::display()
     void dis_rev();
 }
 
-bool Dlist :: ins_beg(int num)
+bool Dlist ::ins_beg(int num)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->data = num;
@@ -83,7 +81,7 @@ bool Dlist :: ins_beg(int num)
     }
 }
 
-bool Dlist :: ins_end(int num)
+bool Dlist ::ins_end(int num)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->data = num;
@@ -103,40 +101,45 @@ bool Dlist :: ins_end(int num)
     }
 }
 
-bool Dlist :: ins_pos (int num, int pos)
+bool Dlist ::ins_pos(int num, int pos)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
 
-    if (pos == 0 || head == nullptr) {
+    if (pos == 0 || head == nullptr)
+    {
         ins_beg(num);
     }
 
-    if (newnode == nullptr) {
+    if (newnode == nullptr)
+    {
         return 0;
     }
 
     newnode->data = num;
 
-    struct node* temp = head;
+    struct node *temp = head;
 
-    for (int i = 1; i < pos; i++) {
+    for (int i = 1; i < pos; i++)
+    {
 
-        if (temp == nullptr) {
+        if (temp == nullptr)
+        {
             return 0;
         }
 
         temp = temp->next;
-
     }
 
-    if (temp == nullptr) {
+    if (temp == nullptr)
+    {
         return 0;
     }
 
     newnode->next = temp->next;
     newnode->prev = temp;
-    
-    if (temp->next != nullptr) {
+
+    if (temp->next != nullptr)
+    {
         temp->next->prev = newnode;
     }
 
@@ -145,7 +148,7 @@ bool Dlist :: ins_pos (int num, int pos)
     return 1;
 }
 
-int Dlist :: del_beg()
+int Dlist ::del_beg()
 {
     if (head == NULL)
         return np;
@@ -157,87 +160,90 @@ int Dlist :: del_beg()
         tail = NULL;
         return data;
     }
-    
+
     else
     {
         int data = head->data;
         head = head->next;
-        head -> prev = NULL;
+        head->prev = NULL;
         return data;
     }
 }
 
-int Dlist :: del_end()
+int Dlist ::del_end()
 {
     struct node *temp = tail->prev;
 
-    if(head == NULL) {
+    if (head == NULL)
+    {
         printf("The list is empty.");
     }
 
-    else if(head == tail) {
-       return del_beg();
+    else if (head == tail)
+    {
+        return del_beg();
     }
 
-    else {
+    else
+    {
         return temp->next->data;
-        temp -> next = NULL;
+        temp->next = NULL;
         tail = temp;
     }
 }
 
-
-int Dlist :: del_pos(int pos)
+int Dlist ::del_pos(int pos)
 {
     int count = 0;
     struct node *temp = head;
     struct node *temp2;
 
-    if(pos == 0) {
+    if (pos == 0)
+    {
         return del_beg();
     }
 
-    else 
+    else
     {
-        while(count < pos -1) 
+        while (count < pos - 1)
         {
-            temp = temp -> next;
+            temp = temp->next;
             count = count + 1;
         }
 
-        if(temp -> next != NULL)
+        if (temp->next != NULL)
         {
-            temp2 = temp -> next -> next;
-            temp -> next = temp2;
-            temp2 -> prev = temp;
+            temp2 = temp->next->next;
+            temp->next = temp2;
+            temp2->prev = temp;
             return 1;
-        
         }
 
-        else {
+        else
+        {
             return del_end();
         }
     }
 }
 
-int Dlist :: search(int num)
+int Dlist ::search(int num)
 {
-    if (head == nullptr) 
+    if (head == nullptr)
     {
         return 0;
     }
-    struct node* temp = head;
+    struct node *temp = head;
     int pos = 0;
-    while (temp != nullptr && temp->data != num) 
+    while (temp != nullptr && temp->data != num)
     {
         temp = temp->next;
         pos++;
     }
-    if (temp == nullptr) 
+    if (temp == nullptr)
     {
         return 0;
     }
-    return pos+1;
+    return pos + 1;
 }
 
 int main()
@@ -324,7 +330,6 @@ int main()
                 printf("%d found at %d index position", num, sn);
             }
             break;
-
 
         case 8:
             l1.display();

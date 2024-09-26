@@ -1,4 +1,4 @@
-//C++ menu-driven program to implement List ADT using a singly linked list.
+// C++ menu-driven program to implement List ADT using a singly linked list.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -63,7 +63,10 @@ bool List ::ins_end(int num)
     newnode->data = num;
     newnode->next = NULL;
     if (head == NULL)
+    {
         head = newnode;
+        return 1;
+    }
     else
     {
         struct node *temp = head;
@@ -143,39 +146,45 @@ int List::del_end()
 }
 
 int List::del_pos(int pos)
-{   
-    if (pos==0)
+{
+    if (pos == 0)
         del_beg();
 
     else if (head == NULL)
         return np;
 
-    else{
-        struct node* temp=head;
+    else
+    {
+        struct node *temp = head;
         int i;
-        for(i=0;i<pos-1;i++){
-            temp=temp->next;
+        for (i = 0; i < pos - 1; i++)
+        {
+            temp = temp->next;
         }
-        temp->next=temp->next->next;
+        temp->next = temp->next->next;
         return 1;
-
     }
 }
 
 int List::search(int num)
 {
-    if(head==NULL){
+    if (head == NULL)
+    {
         return np;
     }
-    else{
-        struct node* temp=head;
-        int i=0;
-        while(temp!=NULL){
-            if(temp->data==num){
+    else
+    {
+        struct node *temp = head;
+        int i = 0;
+        while (temp != NULL)
+        {
+            if (temp->data == num)
+            {
                 return i;
-                break;}
+                break;
+            }
             i++;
-            temp=temp->next;
+            temp = temp->next;
         }
         return np1;
     }
@@ -183,23 +192,24 @@ int List::search(int num)
 
 void List::rev()
 {
-    struct node* prev=NULL;
-	struct node* current=head;
-	struct node* next=NULL;
-	while(current!=NULL){
-		next=current->next;
-		current->next=prev;
-		prev=current;
-		current=next;
-		}
-	head=prev;
+    struct node *prev = NULL;
+    struct node *current = head;
+    struct node *next = NULL;
+    while (current != NULL)
+    {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
 }
 
 void List::rev_dis()
 {
     rev();
-	display();
-	rev();
+    display();
+    rev();
 }
 
 int main()
@@ -285,10 +295,10 @@ int main()
 
             else if (dn == np1)
                 printf("Element not found in the List!");
-            
+
             else
-                printf("Element found at position ",dn);
-                break;
+                printf("Element found at position ", dn);
+            break;
 
         case 8:
             l1.display();
@@ -306,7 +316,7 @@ int main()
         case 11:
             exit(0);
             break;
-        
+
         default:
             printf("Please Enter a Valid Choice!");
             break;
