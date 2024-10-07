@@ -1,6 +1,6 @@
 /*
-A. Write a separate C++ menu-driven program to implement Queue ADT using an integer array of size 5.
-The Queue ADT has the following operations,
+B.C++ menu-driven program to implement Circular Queue ADT using an integer array of size 5.
+The Circular Queue ADT has the following operations,
 
 1. Enqueue
 2. Dequeue
@@ -12,83 +12,71 @@ What is the time complexity of each of the operations?
 
 #include <stdio.h>
 #include <stdlib.h>
-#define SIZE 5
 #define np 0
 
 class queue
 {
-    int arr[SIZE];
-    int front;
-    int rear;
+    struct node
+    {
+        int data;
+        struct node *next, *prev;
+    } *head, *tail;
 
 public:
     queue()
     {
-        front = -1;
-        rear = -1;
+        head = NULL;
+        tail = NULL;
     }
-    int isfull();
+
     int isempty();
     int enqueue(int);
     int dequeue();
     void peek();
 };
 
-int queue ::isfull()
-{
-    if (rear == SIZE - 1)
-        return 1;
-
-    else
-        return 0;
-}
-
 int queue ::isempty()
 {
-    if ((front == -1 && rear == -1))
+    if (head == NULL)
         return 1;
-
     else
         return 0;
 }
 
 int queue ::enqueue(int num)
 {
-    if (isfull())
-        return 0;
-
-    else if (isempty())
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
+    newnode->data = num;
+    newnode->next = head;
+    newnode->prev = NULL;
+    if (isempty())
     {
-        arr[0] = num;
-        front = 0;
-        rear = 0;
+        head = newnode;
+        tail = newnode;
         return 1;
     }
-
-    else
-    {
-        rear++;
-        arr[rear] = num;
-        return 1;
-    }
+    head = newnode;
+    (newnode->next)->prev = newnode;
+    return 1;
 }
 
 int queue ::dequeue()
 {
-    int temp;
+    int data;
     if (isempty())
         return np;
 
-    else if (front == rear)
+    else if (head->next == NULL)
     {
-        temp = arr[front];
-        front = rear = -1;
-        return temp;
+        data = head->data;
+        head = NULL;
+        tail = NULL;
+        return data;
     }
 
-    temp = arr[front];
-    front++;
-    return temp;
+    data = tail->data;
+    tail = tail->prev;
+    return data;
 }
 
 void queue ::peek()
@@ -97,7 +85,7 @@ void queue ::peek()
         printf("Queue is Empty!\n");
 
     else
-        printf("Front Element is: %d", arr[front]);
+        printf("Front Element is: %d", tail->data);
 }
 
 int main()
@@ -120,19 +108,25 @@ int main()
             printf("Enter the number: ");
             scanf(" %d", &num);
             if (l1.enqueue(num))
+            {
                 printf("\n Inserted %d successfully.\n", num);
-
+            }
             else
+            {
                 printf("\n Insertion unsuccessful. Array is Full.\n");
+            }
             break;
 
         case 2:
             ans = l1.dequeue();
             if (ans != np)
+            {
                 printf("\n Dequeued %d", ans);
-
+            }
             else
+            {
                 printf("\n Queue empty.\n");
+            }
             break;
 
         case 3:
