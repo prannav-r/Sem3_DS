@@ -1,4 +1,4 @@
-//C++ menu-driven program to implement List ADT using a circular linked list.
+// C++ menu-driven program to implement List ADT using a circular linked list.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +28,6 @@ public:
     int search(int);
     void display();
 };
-
 
 // INSERT AT BEGINNING: O(N)
 bool CircularList::ins_beg(int num)
@@ -267,7 +266,7 @@ void CircularList::display()
         temp = temp->next;
     }
     printf("%d ", temp->data);
-    printf("\n");  
+    printf("\n");
 }
 
 int main()

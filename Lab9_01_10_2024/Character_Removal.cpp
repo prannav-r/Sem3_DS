@@ -13,7 +13,7 @@ int main()
     scanf("%d", &num);
     char string[num];
     printf("Enter input string: ");
-    scanf("%s", string);
+    scanf("%s", &string);
     for (int i = 0; i < num; i++)
     {
         if (l1.isempty())
